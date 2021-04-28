@@ -1,0 +1,21 @@
+spring:
+  cloud:
+    stream:
+      bindings:
+        process-in-0:
+          destination: sample_topic_in
+          consumer:
+            maxAttempts: 1
+        process-out-0:
+          destination: sample_topic_out
+        bridge-out-0:
+          destination: sample_bridge_topic_out_new
+      kafka:
+        binder:
+          transaction:
+            transaction-id-prefix: sample-
+            producer:
+              configuration:
+                retries: 1
+                acks: all
+          brokers: localhost:9092
